@@ -1,15 +1,12 @@
 package com.ironahck.temporarymails.service;
 
-import com.ironahck.temporarymails.controller.AccountController;
-import com.ironahck.temporarymails.controller.DomainController;
+import com.ironahck.temporarymails.dto.MessageIntoDTO;
 import com.ironahck.temporarymails.model.Account;
-import com.ironahck.temporarymails.repository.AccountRepository;
 import com.ironahck.temporarymails.utils.Colors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
-import java.util.Optional;
 import java.util.Scanner;
 
 @Service
@@ -19,6 +16,8 @@ public class MainMenuService {
 
     private final Scanner userInput;
     private final AccountService accountService;
+
+    private final MessageService messageService;
     public void createAccount() {
         System.out.println("\nEnter a username:");
         var username = userInput.nextLine();
@@ -45,5 +44,16 @@ public class MainMenuService {
             return myAccount.get();
         }
         return null;
+    }
+
+    public void showAllMessages(Account account) {
+        var messages = messageService.getMessages(account);
+        if (messages != null){
+            for(MessageIntoDTO message : messages.getMember()){
+                System.out.println(message);
+            }
+        }else{
+            System.out.println("This MailBox is Empty");
+        }
     }
 }

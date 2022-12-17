@@ -1,8 +1,7 @@
 package com.ironahck.temporarymails.controller;
 
 import com.ironahck.temporarymails.dto.AccountDTO;
-import com.ironahck.temporarymails.dto.MessageDTO;
-import com.ironahck.temporarymails.dto.Messages;
+import com.ironahck.temporarymails.dto.MessageIntoDTO;
 import com.ironahck.temporarymails.dto.MyTokenDTO;
 import com.ironahck.temporarymails.model.Account;
 import com.ironahck.temporarymails.proxy.MailTmProxy;
@@ -17,16 +16,16 @@ public class AccountController {
     MailTmProxy mailTmProxy;
 
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
-    public AccountDTO getAccountById(@RequestHeader(value = "Authorization", required = false) String authorizationHeader, @PathVariable String id){
+    public AccountDTO getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
         return mailTmProxy.getAccountById(authorizationHeader, id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/messages")
-    public Messages getMessages(@RequestHeader(value = "Authorization", required = true) String authorizationHeader){
-        return mailTmProxy.getMessages(authorizationHeader);
-    }
+  /*  @RequestMapping(method = RequestMethod.GET, value = "/messages")
+    public MessagesDTO getMessages(@RequestHeader(value = "Authorization", required = true) String authorizationHeader){
+        return mailTmProxy.getMessages(authorizationHeader);∑
+    }*/
     @RequestMapping(method = RequestMethod.GET, value = "/messages/{id}")
-    public MessageDTO getMessage(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
+    public MessageIntoDTO getMessage(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
         return mailTmProxy.getMessage(authorizationHeader, id);
     }
 

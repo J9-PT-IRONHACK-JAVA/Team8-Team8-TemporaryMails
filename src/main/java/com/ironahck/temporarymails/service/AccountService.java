@@ -11,14 +11,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 @Service
 @RequiredArgsConstructor
 public class AccountService {
     private final AccountController accountController;
     private final DomainController domainController;
-
     private final AccountRepository accountRepository;
 
     public void createAccount(String username, String password){
@@ -29,6 +27,7 @@ public class AccountService {
         bearerToken = "Bearer " + bearerToken;
         account.setUsername(username);
         account.setBearerToken(bearerToken);
+        System.out.println(account.getId());
         System.out.println(account.getBearerToken());
         account.setId(newAccount.getId());
         System.out.println(account.getId());
@@ -44,6 +43,7 @@ public class AccountService {
         var myAccount = accountController.getAccountById(token, id);
         System.out.println(Colors.GREEN_BOLD + "\nWelcome " + account.get().getUsername() + " !\n" + Colors.RESET);
         System.out.println("You are logged SUCCESSFULLY as " + myAccount.getAddress() + " !\n");
+        System.out.println(account.get().getId());
     }
 
     public Optional<Account> findByInternalId(Long id) {

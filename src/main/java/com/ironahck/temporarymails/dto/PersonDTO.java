@@ -10,4 +10,11 @@ import lombok.NoArgsConstructor;
 public class PersonDTO {
     private String address;
     private String name;
+
+    @Override
+    public String toString() {
+        return
+                "\nfromAddress: " + address +
+                "\nfromName: " + name + "\n";
+    }
 }
