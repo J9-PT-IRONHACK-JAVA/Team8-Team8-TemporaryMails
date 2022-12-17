@@ -22,15 +22,9 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
-    public AccountDTO getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
+    public AccountDTO getAccountById(@RequestHeader(value = "Authorization") String authorizationHeader, @PathVariable String id){
         return mailTmProxy.getAccountById(authorizationHeader, id);
-    }
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/messages/{id}")
-    public MessageSingleDTO getMessage(@RequestHeader(value = "Authorization") String authorizationHeader, @PathVariable String id){
-        return mailTmProxy.getMessage(authorizationHeader, id);
-    }
+    };
 
 
     //Create ACCOUNT with: id, and address

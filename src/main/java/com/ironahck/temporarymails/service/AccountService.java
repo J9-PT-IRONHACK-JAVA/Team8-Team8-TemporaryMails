@@ -50,9 +50,9 @@ public class AccountService {
         if (accountToDelete.isPresent()){
             accountController.deleteAccount(accountToDelete.get().getBearerToken() ,accountToDelete.get().getId());
             delete(accountToDelete.get());
-            System.out.println("Account deleted successfully!");
+            System.out.println(Colors.BLUE_BOLD + "\nAccount deleted successfully!\n" + Colors.RESET);
         } else {
-            System.out.println("Any account has been find by this params");
+            System.out.println(Colors.RED_BOLD + "\nAny account has been find by this params\n" + Colors.RESET);
         }
     }
 
