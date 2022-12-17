@@ -1,15 +1,11 @@
 package com.ironahck.temporarymails.service;
 
-import com.ironahck.temporarymails.controller.AccountController;
-import com.ironahck.temporarymails.controller.DomainController;
 import com.ironahck.temporarymails.model.Account;
-import com.ironahck.temporarymails.repository.AccountRepository;
 import com.ironahck.temporarymails.utils.Colors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
-import java.util.Optional;
 import java.util.Scanner;
 
 @Service
@@ -45,5 +41,13 @@ public class MainMenuService {
             return myAccount.get();
         }
         return null;
+    }
+
+    public void deleteAccount() {
+        System.out.println("\nEnter your address:");
+        var address = userInput.nextLine();
+        System.out.println("\nEnter your password:");
+        var password = userInput.nextLine();
+        accountService.deleteAccount(address, password);
     }
 }
