@@ -1,21 +1,19 @@
 package com.ironahck.temporarymails.proxy;
 
-import com.ironahck.temporarymails.dto.Account;
+import com.ironahck.temporarymails.dto.AccountDTO;
 import com.ironahck.temporarymails.dto.Message;
 import com.ironahck.temporarymails.dto.Messages;
-import com.ironahck.temporarymails.dto.MyToken;
-import feign.Headers;
+import com.ironahck.temporarymails.model.Account;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @FeignClient(name = "MailTm", url = "https://api.mail.tm/")
 public interface MailTmProxy {
 
 
         @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
-        Account getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id);
+        AccountDTO getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id);
 
 
         @RequestMapping(method = RequestMethod.GET, value = "/messages")
@@ -23,8 +21,11 @@ public interface MailTmProxy {
 
         @RequestMapping(method = RequestMethod.GET, value = "/messages/{id}")
         Message getMessage(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id);
-        @RequestMapping(method = RequestMethod.POST, value = "/token")
-        MyToken getToken(@RequestParam String address, @RequestParam String password);
+
+       @PostMapping(value = "/accounts")
+        @ResponseStatus (HttpStatus.CREATED)//pone el codigo 201 si es  OK
+        Account createAccount(@RequestBody AccountDTO account);
+
 
 
 

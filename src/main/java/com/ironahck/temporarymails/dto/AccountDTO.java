@@ -4,29 +4,26 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @Entity
 @NoArgsConstructor
-public class Account {
+public class AccountDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long internal_id;
-
+    private Long internalId;
     private String id;
-   // private String username;
+    private String username;
     private String address;
-   // private String password;
+    private String password;
 
-    private String bearer_token;
+    private String bearerToken;
 
 
-    public Account(String id, String address) {
-        this.id = id;
+    public AccountDTO(String address, String password) {
+
         this.address = address;
-        this.bearer_token = "";
+        this.password = password;
+
     }
 }
 

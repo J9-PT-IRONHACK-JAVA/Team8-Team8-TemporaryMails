@@ -1,8 +1,10 @@
 package com.ironahck.temporarymails.controller;
 
-import com.ironahck.temporarymails.dto.Account;
+import com.google.gson.Gson;
+import com.ironahck.temporarymails.dto.AccountDTO;
 import com.ironahck.temporarymails.dto.Message;
 import com.ironahck.temporarymails.dto.Messages;
+import com.ironahck.temporarymails.model.Account;
 import com.ironahck.temporarymails.proxy.MailTmProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,7 @@ public class AccountController {
     };*/
 
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
-    public Account getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
+    public AccountDTO getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
         return mailTmProxy.getAccountById(authorizationHeader, id);
     }
 
@@ -35,10 +37,19 @@ public class AccountController {
         return mailTmProxy.getMessage(authorizationHeader, id);
     }
 
-    @PostMapping("/token")
+  /*  @PostMapping("/token")
     @ResponseStatus (HttpStatus.CREATED)//pone el codigo 201 si es  OK
-    public String getToken (@RequestBody String address, @RequestBody String password) {
+    public String getToken (@RequestBody String address, String password) {
         var myToken = mailTmProxy.getToken(address, password);
         return myToken.getToken();
+    }*/
+
+
+
+    @PostMapping("/accounts")
+    @ResponseStatus (HttpStatus.CREATED)//pone el codigo 201 si es  OK
+    public Account createAccount (@RequestBody AccountDTO account) {
+        return mailTmProxy.createAccount(account);
     }
+
 }
