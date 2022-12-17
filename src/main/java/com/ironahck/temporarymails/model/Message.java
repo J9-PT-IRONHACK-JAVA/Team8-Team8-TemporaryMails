@@ -14,4 +14,10 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long interId;
+    private String id;
+    private String accountId;
+    private String fromAddress;
+    private String fromName;
+    private String subject;
+    private String text;
 }

@@ -47,7 +47,7 @@ public class MainMenu {
             } else if (selection.equals("3")) {
                 var account = mainMenuService.logInAccount();
                 if(account != null){
-                  //  loggedUser(account.get());
+                    loggedUser(account);
                     System.out.println(Colors.GREEN_BOLD + "\nYou are SUCCESSFULLY logged out!\n" + Colors.RESET);
                 }else{
                     System.out.println(Colors.RED_BOLD + "\nIncorrect ACCOUNT\n" + Colors.RESET);
@@ -84,11 +84,11 @@ public class MainMenu {
             selection = userInput.nextLine();
 
             if (selection.equals("1")) {
-
+                mainMenuService.showAllMessages(account);
                 pressToContinue();
                 selection = "start";
             } else if (selection.equals("2")) {
-              //  mainMenuService.showAllMessages();
+
                 pressToContinue();
                 selection = "start";
             } else if (selection.equals("3")) {
@@ -105,7 +105,7 @@ public class MainMenu {
 
     public void pressToContinue(){
         var selection = "start";
-        sleep(500);
+        sleep(300);
         do{
             System.out.println(Colors.YELLOW_BOLD + "\n\t[Press ENTER to continue]\n" + Colors.RESET);
             selection = userInput.nextLine();
@@ -114,9 +114,7 @@ public class MainMenu {
 
     public static void printDilay(String text, int s) {
         for (String line: text.split("\\n")) {
-            try {
-                Thread.sleep(s);
-            } catch (InterruptedException ignored) {}
+            MainMenu.sleep(s);
             System.out.println(line);
         }
     }

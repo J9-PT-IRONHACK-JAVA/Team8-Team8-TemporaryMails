@@ -1,8 +1,8 @@
 package com.ironahck.temporarymails.proxy;
 
 import com.ironahck.temporarymails.dto.AccountDTO;
-import com.ironahck.temporarymails.dto.MessageDTO;
-import com.ironahck.temporarymails.dto.Messages;
+import com.ironahck.temporarymails.dto.MessageIntoDTO;
+import com.ironahck.temporarymails.dto.MessagesDTO;
 import com.ironahck.temporarymails.dto.MyTokenDTO;
 import com.ironahck.temporarymails.model.Account;
 import org.springframework.cloud.openfeign.FeignClient;

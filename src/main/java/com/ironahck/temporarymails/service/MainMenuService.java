@@ -15,6 +15,8 @@ public class MainMenuService {
 
     private final Scanner userInput;
     private final AccountService accountService;
+
+    private final MessageService messageService;
     public void createAccount() {
         System.out.println("\nEnter a username:");
         var username = userInput.nextLine();
@@ -42,6 +44,17 @@ public class MainMenuService {
         }
         return null;
     }
+
+
+    public void showAllMessages(Account account) {
+        var messages = messageService.getMessages(account);
+        if (messages != null){
+            for(MessageIntoDTO message : messages.getMember()){
+                System.out.println(message);
+            }
+        }else{
+            System.out.println("This MailBox is Empty");
+        }
 
     public void deleteAccount() {
         System.out.println("\nEnter your address:");
