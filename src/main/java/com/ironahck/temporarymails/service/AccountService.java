@@ -2,7 +2,6 @@ package com.ironahck.temporarymails.service;
 
 import com.ironahck.temporarymails.controller.AccountController;
 import com.ironahck.temporarymails.controller.DomainController;
-import com.ironahck.temporarymails.dto.AccountDTO;
 import com.ironahck.temporarymails.model.Account;
 import com.ironahck.temporarymails.repository.AccountRepository;
 import com.ironahck.temporarymails.utils.Colors;
@@ -44,6 +43,17 @@ public class AccountService {
         System.out.println(Colors.GREEN_BOLD + "\nWelcome " + account.get().getUsername() + " !\n" + Colors.RESET);
         System.out.println("You are logged SUCCESSFULLY as " + myAccount.getAddress() + " !\n");
         System.out.println(account.get().getId());
+    }
+
+    public void deleteAccount(String address, String password) {
+        var accountToDelete = accountRepository.findByAddressAndPassword(address, password);
+        if (accountToDelete.isPresent()){
+            accountController.deleteAccount(accountToDelete.get().getBearerToken() ,accountToDelete.get().getId());
+            delete(accountToDelete.get());
+            System.out.println("Account deleted successfully!");
+        } else {
+            System.out.println("Any account has been find by this params");
+        }
     }
 
     public Optional<Account> findByInternalId(Long id) {

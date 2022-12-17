@@ -1,6 +1,5 @@
 package com.ironahck.temporarymails.service;
 
-import com.ironahck.temporarymails.dto.MessageIntoDTO;
 import com.ironahck.temporarymails.model.Account;
 import com.ironahck.temporarymails.utils.Colors;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +45,7 @@ public class MainMenuService {
         return null;
     }
 
+
     public void showAllMessages(Account account) {
         var messages = messageService.getMessages(account);
         if (messages != null){
@@ -55,5 +55,12 @@ public class MainMenuService {
         }else{
             System.out.println("This MailBox is Empty");
         }
+
+    public void deleteAccount() {
+        System.out.println("\nEnter your address:");
+        var address = userInput.nextLine();
+        System.out.println("\nEnter your password:");
+        var password = userInput.nextLine();
+        accountService.deleteAccount(address, password);
     }
 }

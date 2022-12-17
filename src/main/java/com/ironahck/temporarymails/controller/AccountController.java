@@ -15,17 +15,24 @@ public class AccountController {
     @Autowired
     MailTmProxy mailTmProxy;
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/accounts/{id}")
+    public void deleteAccount(@RequestHeader(value = "Authorization") String authorizationHeader, @PathVariable String id) {
+        mailTmProxy.deleteAccount(authorizationHeader, id);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
     public AccountDTO getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
         return mailTmProxy.getAccountById(authorizationHeader, id);
     }
 
-  /*  @RequestMapping(method = RequestMethod.GET, value = "/messages")
-    public MessagesDTO getMessages(@RequestHeader(value = "Authorization", required = true) String authorizationHeader){
-        return mailTmProxy.getMessages(authorizationHeader);∑
-    }*/
+
+    @RequestMapping(method = RequestMethod.GET, value = "/messages")
+    public Messages getMessages(@RequestHeader(value = "Authorization") String authorizationHeader){
+        return mailTmProxy.getMessages(authorizationHeader);
+    }
+    
     @RequestMapping(method = RequestMethod.GET, value = "/messages/{id}")
-    public MessageIntoDTO getMessage(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
+    public MessageDTO getMessage(@RequestHeader(value = "Authorization") String authorizationHeader, @PathVariable String id){
         return mailTmProxy.getMessage(authorizationHeader, id);
     }
 
