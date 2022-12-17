@@ -1,21 +1,40 @@
 package com.ironahck.temporarymails.proxy;
 
-import com.ironahck.temporarymails.dto.Account;
-import com.ironahck.temporarymails.dto.MyToken;
-import feign.Headers;
+import com.ironahck.temporarymails.dto.*;
+import com.ironahck.temporarymails.model.Account;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "MailTm", url = "https://api.mail.tm/")
 public interface MailTmProxy {
 
 
-        @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
-        Account getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id);
 
 
-        @RequestMapping(method = RequestMethod.POST, value = "/token")
-        MyToken getToken(@RequestParam String address, @RequestParam String password);
+
+        @RequestMapping(method = RequestMethod.GET, value = "/messages")
+        MessagesDTO getMessages(@RequestHeader(value = "Authorization") String authorizationHeader);
+
+        @RequestMapping(method = RequestMethod.GET, value = "/messages/{id}")
+        MessageSingleDTO getMessage(@RequestHeader(value = "Authorization") String authorizationHeader, @PathVariable String id);
+
+     //Create a NEW ACCOUNT
+    @PostMapping(value = "/accounts")
+    @ResponseStatus (HttpStatus.CREATED)//pone el codigo 201 si es  OK
+    AccountDTO createAccount(@RequestBody Account account);
+
+    @PostMapping("/token")
+    @ResponseStatus (HttpStatus.CREATED)//pone el codigo 201 si es  OK
+    MyTokenDTO getToken (@RequestBody  Account account);
+
+    //GET an account By Id
+    @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
+    AccountDTO getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/accounts/{id}")
+    void deleteAccount(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id);
+
 
 
 
@@ -24,8 +43,4 @@ public interface MailTmProxy {
         Account getAccountById(@PathVariable String id);*/
 }
 
-/*@FeignClient(name = "weather", url = "https://goweather.herokuapp.com/weather/")
-public interface WeatherProxy {
-    @GetMapping("{city}")
-    Weather getWeatherByCity(@PathVariable String city);
-}*/
+

@@ -1,7 +1,6 @@
 package com.ironahck.temporarymails;
 
-import com.ironahck.temporarymails.controller.MailTmController;
-import com.ironahck.temporarymails.menu.MainMenu;
+import com.ironahck.temporarymails.Menu.MainMenu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +20,7 @@ public class TemporaryMailsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        mainMenu.printAccount();
+        mainMenu.start();
 
     }
 
