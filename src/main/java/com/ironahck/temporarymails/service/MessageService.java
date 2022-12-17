@@ -5,6 +5,7 @@ import com.ironahck.temporarymails.dto.MessageIntoDTO;
 import com.ironahck.temporarymails.model.Account;
 import com.ironahck.temporarymails.model.Message;
 import com.ironahck.temporarymails.repository.MessageRepository;
+import com.ironahck.temporarymails.utils.Colors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,21 @@ public class MessageService {
         if (mailToRead.isPresent()) {
             System.out.println(mailToRead.get() + "\n" + mailToRead.get().getText());
         }
+    }
+
+    public void deleteMessage(String token, Long id) {
+        var messageToDelete = messageRepository.findByInterId(id);
+        if (messageToDelete.isPresent()){
+            messageController.deleteMessage(token, messageToDelete.get().getId());
+            delete(messageToDelete.get());
+            System.out.println(Colors.BLUE_BOLD + "\nMessage deleted successfully!\n" + Colors.RESET);
+        } else {
+            System.out.println(Colors.RED_BOLD + "\nAny message has been find by this params\n" + Colors.RESET);
+        }
+    }
+
+    public void delete(Message message){
+        messageRepository.delete(message);
     }
 
 

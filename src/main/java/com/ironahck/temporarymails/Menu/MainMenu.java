@@ -73,7 +73,7 @@ public class MainMenu {
             if (selection.equals("start")) {
                 String text = """
                         
-                        1) Show all mails
+                        1) Show all emails
                         2) Show email by id
                         3) Delete email by id
                         4) Log out \n"""
@@ -92,7 +92,9 @@ public class MainMenu {
                 pressToContinue();
                 selection = "start";
             } else if (selection.equals("3")) {
-
+                mainMenuService.deleteMessage(account);
+                pressToContinue();
+                selection = "start";
             } else if (selection.equals("4")) {
 
             }else if (selection.equals("5")) {

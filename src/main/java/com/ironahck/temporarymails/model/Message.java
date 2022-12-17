@@ -13,6 +13,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long interId;
     @Column(unique = true)
+    private Long internalId;
     private String id;
     private String accountId;
     private String fromAddress;

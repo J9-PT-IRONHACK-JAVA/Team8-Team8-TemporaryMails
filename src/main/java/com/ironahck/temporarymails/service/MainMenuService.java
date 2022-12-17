@@ -61,9 +61,16 @@ public class MainMenuService {
         }
 
     public void showOneMessage() {
-        System.out.println("Enter a mail id:");
+        System.out.println("Enter a message id:");
         var mailId = userInput.nextLine();
         messageService.printOneMessage(mailId);
+    }
+
+    public void deleteMessage(Account account) {
+        System.out.println("Enter a message id: ");
+        var messageId = Long.parseLong(userInput.nextLine());
+        var token = account.getBearerToken();
+        messageService.deleteMessage(token, messageId);
     }
 }
 
