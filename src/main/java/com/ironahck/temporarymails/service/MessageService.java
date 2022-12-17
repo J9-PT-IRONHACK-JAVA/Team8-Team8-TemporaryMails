@@ -2,9 +2,9 @@ package com.ironahck.temporarymails.service;
 
 import com.ironahck.temporarymails.controller.MessageController;
 import com.ironahck.temporarymails.dto.MessageIntoDTO;
-import com.ironahck.temporarymails.dto.MessagesDTO;
 import com.ironahck.temporarymails.model.Account;
 import com.ironahck.temporarymails.model.Message;
+import com.ironahck.temporarymails.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +13,26 @@ import org.springframework.stereotype.Service;
 public class MessageService {
 
     private final MessageController messageController;
+    private final MessageRepository messageRepository;
 
 
-    public MessagesDTO getMessages(Account account){
+    public void printAllMessages(Account account){
         var token = account.getBearerToken();
-       // return
         var messageList = messageController.getMessages(token);
-      /*  for(MessageIntoDTO messages : messageList.getMember()){
+        for (MessageIntoDTO message : messageList.getMember()) {
+            try {
+                messageRepository.save(new Message(message.getId(), message.getAccountId(), message.getFrom().getAddress(), message.getFrom().getName(), message.getSubject(), message.getIntro()));
+            } catch (Exception e) {
+            }
+        }
+        System.out.println(messageRepository.findAll());
+    }
 
-        }*/
-        return messageList;
+    public void printOneMessage(String mailId) {
+        var mailToRead = messageRepository.findById(Long.parseLong(mailId));
+        if (mailToRead.isPresent()) {
+            System.out.println(mailToRead.get() + "\n" + mailToRead.get().getText());
+        }
     }
 
 

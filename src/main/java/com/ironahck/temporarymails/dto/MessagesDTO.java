@@ -11,4 +11,5 @@ public class MessagesDTO {
 
     @JsonAlias("hydra:member")
     ArrayList<MessageIntoDTO> member;
+
 }
