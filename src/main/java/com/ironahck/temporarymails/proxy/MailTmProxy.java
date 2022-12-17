@@ -1,9 +1,6 @@
 package com.ironahck.temporarymails.proxy;
 
-import com.ironahck.temporarymails.dto.AccountDTO;
-import com.ironahck.temporarymails.dto.MessageIntoDTO;
-import com.ironahck.temporarymails.dto.MessagesDTO;
-import com.ironahck.temporarymails.dto.MyTokenDTO;
+import com.ironahck.temporarymails.dto.*;
 import com.ironahck.temporarymails.model.Account;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
@@ -17,10 +14,10 @@ public interface MailTmProxy {
 
 
         @RequestMapping(method = RequestMethod.GET, value = "/messages")
-        Messages getMessages(@RequestHeader(value = "Authorization") String authorizationHeader);
+        MessagesDTO getMessages(@RequestHeader(value = "Authorization") String authorizationHeader);
 
         @RequestMapping(method = RequestMethod.GET, value = "/messages/{id}")
-        MessageDTO getMessage(@RequestHeader(value = "Authorization") String authorizationHeader, @PathVariable String id);
+        MessageSingleDTO getMessage(@RequestHeader(value = "Authorization") String authorizationHeader, @PathVariable String id);
 
      //Create a NEW ACCOUNT
     @PostMapping(value = "/accounts")
