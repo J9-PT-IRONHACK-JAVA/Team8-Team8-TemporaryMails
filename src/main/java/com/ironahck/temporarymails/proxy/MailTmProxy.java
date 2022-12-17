@@ -17,10 +17,10 @@ public interface MailTmProxy {
 
 
         @RequestMapping(method = RequestMethod.GET, value = "/messages")
-        Messages getMessages(@RequestHeader(value = "Authorization", required = true) String authorizationHeader);
+        Messages getMessages(@RequestHeader(value = "Authorization") String authorizationHeader);
 
         @RequestMapping(method = RequestMethod.GET, value = "/messages/{id}")
-        MessageDTO getMessage(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id);
+        MessageDTO getMessage(@RequestHeader(value = "Authorization") String authorizationHeader, @PathVariable String id);
 
      //Create a NEW ACCOUNT
     @PostMapping(value = "/accounts")
@@ -34,6 +34,9 @@ public interface MailTmProxy {
     //GET an account By Id
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
     AccountDTO getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/accounts/{id}")
+    void deleteAccount(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id);
 
 
 

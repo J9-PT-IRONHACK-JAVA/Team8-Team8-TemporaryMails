@@ -28,8 +28,9 @@ public class MainMenu {
                         
                         1) Create an account
                         2) See all existing accounts
-                        3) Log in \n"""
-                        + Colors.RED + "4) Exit\n" + Colors.RESET;
+                        3) Log in
+                        4) Delete account \n"""
+                        + Colors.RED + "5) Exit\n" + Colors.RESET;
                 printDilay(text, 200);
             }
 
@@ -54,11 +55,15 @@ public class MainMenu {
                 pressToContinue();
                 selection = "start";
             } else if (selection.equals("4")) {
+                mainMenuService.deleteAccount();
+                pressToContinue();
+                selection = "start";
+            } else if (selection.equals("5")) {
                 System.exit(0);
             } else {
                 System.out.println("Wrong selection, repeat please.");
             }
-        } while (!selection.equals("4"));
+        } while (!selection.equals("5"));
     }
 
     public void loggedUser(Account account){
