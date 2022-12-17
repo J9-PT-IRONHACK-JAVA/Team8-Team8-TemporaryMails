@@ -6,5 +6,5 @@ import java.util.List;
 
 @Data
 public class Messages {
-    List<Message> hydraMember;
+    List<MessageDTO> hydraMember;
 }

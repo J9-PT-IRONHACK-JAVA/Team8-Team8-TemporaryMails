@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountDTO {
-    private String id;
-    private String address;
+public class MessageDTO {
+  private String id;
+  private String accountId;
+  private PersonDTO from;
+  private String subject;
+
+  private String text;
+
 }
-
-
-
-

@@ -1,4 +1,4 @@
-package com.ironahck.temporarymails.dto;
+package com.ironahck.temporarymails.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,14 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class Message {
-
-  @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String fromAddress;
-    private String fromName;
-
-    private String messageId;
-
-    private String accountId;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long interId;
 }
