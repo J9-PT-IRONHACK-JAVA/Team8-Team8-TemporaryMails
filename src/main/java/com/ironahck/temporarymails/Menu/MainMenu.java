@@ -88,7 +88,7 @@ public class MainMenu {
                 pressToContinue();
                 selection = "start";
             } else if (selection.equals("2")) {
-
+                mainMenuService.showOneMessage();
                 pressToContinue();
                 selection = "start";
             } else if (selection.equals("3")) {
