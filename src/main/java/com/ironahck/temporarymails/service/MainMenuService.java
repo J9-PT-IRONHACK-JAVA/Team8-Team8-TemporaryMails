@@ -46,6 +46,9 @@ public class MainMenuService {
         return null;
     }
 
+    public void logOut(){
+        System.out.println(Colors.GREEN_BOLD + "\nYou are SUCCESSFULLY loggedOut!\n" + Colors.RESET);
+    }
 
     public void showAllMessages(Account account) {
         messageService.printAllMessages(account);

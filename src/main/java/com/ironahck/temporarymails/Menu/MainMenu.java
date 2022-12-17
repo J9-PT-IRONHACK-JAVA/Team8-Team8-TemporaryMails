@@ -96,7 +96,7 @@ public class MainMenu {
                 pressToContinue();
                 selection = "start";
             } else if (selection.equals("4")) {
-
+                mainMenuService.logOut();
             }else if (selection.equals("5")) {
                 System.exit(0);
             } else {
