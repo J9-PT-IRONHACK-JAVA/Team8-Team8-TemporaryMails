@@ -1,35 +1,49 @@
 package com.ironahck.temporarymails.controller;
 
-import com.ironahck.temporarymails.dto.Account;
-//import com.ironahck.temporarymails.proxy.MailTmProxy;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.stereotype.Service;
-//import org.springframework.web.bind.annotation.*;
-//
-//@RestController
-//@RequestMapping
-//public class AccountController {
-//
-//    @Autowired
-//    MailTmProxy mailTmProxy;
-//
-//    private String bearerToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzExMzU5MzIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6Iml2YW5AbmlnaHRvcmIuY29tIiwiaWQiOiI2MzliODI5NmY0NTEyNTkyZjMxMDQ1ZTIiLCJtZXJjdXJlIjp7InN1YnNjcmliZSI6WyIvYWNjb3VudHMvNjM5YjgyOTZmNDUxMjU5MmYzMTA0NWUyIl19fQ.m3MxgONlf1Qir0JpZbZZQkIw1LkkXSrJSzb5guAQgNt0M-jcr-Q6x6XZZKAk1SB7IISQjlb-XYRWaocDauvSpw";
+import com.ironahck.temporarymails.dto.AccountDTO;
+import com.ironahck.temporarymails.dto.MessageDTO;
+import com.ironahck.temporarymails.dto.Messages;
+import com.ironahck.temporarymails.dto.MyTokenDTO;
+import com.ironahck.temporarymails.model.Account;
+import com.ironahck.temporarymails.proxy.MailTmProxy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
-   /* @RequestMapping(method = RequestMethod.POST, value = "/token")
-    public String getToken(@RequestBody String address, @RequestBody String password){
-        return mailTmProxy.getToken(address, password).getToken();
-    };*/
+@RestController
+@RequestMapping
+public class AccountController {
+    @Autowired
+    MailTmProxy mailTmProxy;
 
-//    @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
-//    public Account getAccountById(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
-//        return mailTmProxy.getAccountById(authorizationHeader, id);
-//    }
-//
-//    @PostMapping("/token")
-//    @ResponseStatus (HttpStatus.CREATED)//pone el codigo 201 si es  OK
-//    public String getToken (@RequestBody String address, @RequestBody String password) {
-//        var myToken = mailTmProxy.getToken(address, password);
-//        return myToken.getToken();
-//    }
-//}
+    @RequestMapping(method = RequestMethod.GET, value = "/accounts/{id}")
+    public AccountDTO getAccountById(@RequestHeader(value = "Authorization", required = false) String authorizationHeader, @PathVariable String id){
+        return mailTmProxy.getAccountById(authorizationHeader, id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/messages")
+    public Messages getMessages(@RequestHeader(value = "Authorization", required = true) String authorizationHeader){
+        return mailTmProxy.getMessages(authorizationHeader);
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/messages/{id}")
+    public MessageDTO getMessage(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @PathVariable String id){
+        return mailTmProxy.getMessage(authorizationHeader, id);
+    }
+
+
+    //Create ACCOUNT with: id, and address
+    @PostMapping("/accounts")
+    @ResponseStatus (HttpStatus.CREATED)//pone el codigo 201 si es  OK
+    public AccountDTO createAccount (@RequestBody Account account) {
+        return mailTmProxy.createAccount(account);
+    }
+
+    //Setea el BearerToken de la cuenta que se ha creado
+    @PostMapping("/token")
+    @ResponseStatus (HttpStatus.CREATED)//pone el codigo 201 si es  OK
+    public MyTokenDTO getToken (@RequestBody Account account) {
+        return mailTmProxy.getToken(account);
+
+    }
+
+}

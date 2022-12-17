@@ -10,6 +10,7 @@ public class DomainController {
 
     @GetMapping
     public String getDomain() {
+        return "@nightorb.com";
 
     }
 }

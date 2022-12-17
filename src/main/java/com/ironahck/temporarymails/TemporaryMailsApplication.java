@@ -1,6 +1,6 @@
 package com.ironahck.temporarymails;
 
-import com.ironahck.temporarymails.service.MainMenu;
+import com.ironahck.temporarymails.Menu.MainMenu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
